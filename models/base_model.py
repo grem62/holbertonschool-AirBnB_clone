@@ -20,7 +20,7 @@ class BaseModel:
 
     def save(self):
         """
-        Updates the 'update_at' attribute of the object with the current datetime.
+        Updates attribute of the object with the current datetime.
         """
         self.update_at = datetime.now()
 
