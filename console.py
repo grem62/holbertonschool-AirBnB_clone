@@ -1,32 +1,28 @@
-#!/usr/bin/python3
-""" Console with command that begin with do """
-
+#!/usr/bin/env python3
+""" Import cmd for command line interpreters. """
 import cmd
 
 
-class HBNBCommand(cmd.Cmd):
-    prompt = "(hbnb) "
 
-    """ Command that begin with do """
+class HBNBCommand(cmd.Cmd):
+
+    prompt = '(hbnb) '
+
     def do_quit(self, arg):
         """
         Exits the program.
         """
-        quit()
+        return True
 
     def do_EOF(self, arg):
         """
         Exit the program.
         """
-        quit()
+        return True
 
-
-    def emptyline(self, arg):
-        """
-        This function does nothing when an empty line is entered.
-        """
+    def emptyline(self):
+        """Do nothing if line is empty."""
         pass
-
 
 
 if __name__ == '__main__':
