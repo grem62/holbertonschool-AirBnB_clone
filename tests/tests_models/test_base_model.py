@@ -1,5 +1,5 @@
 import unittest
-from datetime import datetime
+from datetime import datetime, timedelta
 import uuid
 from models.base_model import BaseModel
 
@@ -8,11 +8,10 @@ class TestBaseModel(unittest.TestCase):
     def setUp(self):
         self.base_model = BaseModel()
 
-    def test_save_updates_update_at_attribute(self):
-        self.base_model.save()
-
-        self.assertIsInstance(self.base_model.update_at, datetime)
-        self.assertLessEqual((datetime.now() - self.base_model.update_at).total_seconds(), 1)
+    def test_save(self):
+        model = BaseModel()
+        model.save()
+        self.assertAlmostEqual(model.updated_at, datetime.now(), delta=timedelta(microseconds=2))
 
     def test_to_dict_returns_dictionary_representation(self):
         dictionary = self.base_model.to_dict()
