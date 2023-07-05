@@ -1,30 +1,39 @@
 #!/usr/bin/python3
-""" import """
-from datetime import datetime
+""" BaseModel class """
 import uuid
+from datetime import datetime
+import models
 
 
 class BaseModel:
+    """"Class that defines all common
+    attributes/methods for other classes
     """
-    Construct a new BaseModel
-    """
-    def __init__(self):
-        
+    def __init__(self, *args, **kwargs):
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                if key != "__class__":
+                    setattr(self, key, value)
 
-        self.id = str(uuid.uuid4())
-
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
-        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
+        className = self.__class__.__name__
+        return "[{}] ({}) {}".format(className, self.id, self.__dict__)
 
     def save(self):
-        self.update_at = datetime.now()
+        self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
-        dictionnaire = self.__dict__.copy()
-        dictionnaire['__class__'] = self.__class__.__name__
-        dictionnaire['created_at'] = self.created_at.isoformat()
-        dictionnaire['updated_at'] = self.updated_at.isoformat()
-        return dictionnaire
+        dictionary = self.__dict__.copy()
+        dictionary['__class__'] = self.__class__.__name__
+        dictionary['created_at'] = self.created_at.isoformat()
+        dictionary['updated_at'] = self.updated_at.isoformat()
+        return dictionary
