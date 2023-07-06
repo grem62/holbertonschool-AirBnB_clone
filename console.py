@@ -4,6 +4,7 @@ Module for the command interpreter
 """
 import cmd
 from models.base_model import BaseModel
+import shlex
 import models
 import sys
 from models import storage
