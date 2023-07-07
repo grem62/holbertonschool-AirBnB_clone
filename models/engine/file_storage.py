@@ -16,15 +16,7 @@ from models.review import Review
 class FileStorage:
 
     __file_path = "file.json"
-    __objects = {
-        "BaseModel": BaseModel,
-        "User": User,
-        "Place": Place,
-        "State": State,
-        "City": City,
-        "Amenity": Amenity,
-        "Review": Review
-    }
+    __objects = {}
 
     def all(self):
         return self.__objects
@@ -37,16 +29,12 @@ class FileStorage:
         self.__objects[key] = obj
 
     def save(self):
-        """serializes __objects to the JSON file
-           (path: __file_path)
-        """
-        new_dict = {}
-
-        for key, value in FileStorage.__objects.items():
-            new_dict.update({key: value.to_dict()})
-
-        with open(self.__file_path, "w", encoding="utf-8") as file:
-            file.write(json.dumps(new_dict))
+        """ serializes __objects to the JSON file """
+        dict = {}
+        for key in self.__objects:
+            dict[key] = self.__objects[key].to_dict()
+        with open(self.__file_path, "w") as f:
+            json.dump(dict, f)
 
     def reload(self):
         """deserializes the JSON file to __objects
