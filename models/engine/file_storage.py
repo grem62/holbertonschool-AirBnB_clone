@@ -2,10 +2,11 @@
 """new class FileStorage"""
 
 
-import json 
-import os.path 
-import models 
+import json
+import os.path
+import models
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
