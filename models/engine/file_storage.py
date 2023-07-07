@@ -41,7 +41,5 @@ class FileStorage:
             with open(self.__file_path, "r") as f:
                 json_obj = json.load(f)
             for key, val in json_obj.items():
-                cls_name = val["__class__"]
-                cls = getattr(models, cls_name)
-                obj = cls(**val)
+                obj = eval(val["__class__"])(**val)
                 self.__objects[key] = obj
