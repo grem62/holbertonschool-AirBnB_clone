@@ -4,6 +4,7 @@
 
 import json
 import os.path
+import models
 from models.base_model import BaseModel
 from models.user import User
 
@@ -14,14 +15,7 @@ class FileStorage:
     """
     __file_path = "file.json"
     __objects = {}
-    classes = {
-        'BaseModel': BaseModel,
-        'Place': Place,
-        'State': State,
-        'City': City,
-        'Amenity': Amenity,
-        'Review': Review
-    }
+
     def all(self):
         """ returns the dictionary __objects """
         return self.__objects
