@@ -1,7 +1,10 @@
+#!/usr/bin/python3
+
 import unittest
-from datetime import datetime, timedelta
-import uuid
 from models.base_model import BaseModel
+from datetime import datetime
+import os.path
+from models.engine.file_storage import FileStorage
 
 
 class TestBaseModel(unittest.TestCase):
@@ -9,9 +12,11 @@ class TestBaseModel(unittest.TestCase):
         self.base_model = BaseModel()
 
     def test_save(self):
-        model = BaseModel()
-        model.save()
-        self.assertAlmostEqual(model.updated_at, datetime.now(), delta=timedelta(microseconds=2))
+        my_model = BaseModel()
+        old_updated_at = my_model.updated_at
+        my_model.save()
+        self.assertNotEqual(old_updated_at, my_model.updated_at)
+
 
     def test_to_dict_returns_dictionary_representation(self):
         dictionary = self.base_model.to_dict()
@@ -27,6 +32,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(string_representation, str)
         self.assertIn('BaseModel', string_representation)
         self.assertIn(self.base_model.id, string_representation)
+
 
 if __name__ == '__main__':
     unittest.main()
