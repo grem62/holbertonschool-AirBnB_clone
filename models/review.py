@@ -1,11 +1,14 @@
 #!/usr/bin/python3
-""" Review module """
-
+'''
+class User that inherits from BaseModel
+'''
 from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    """Review class from BaseModel"""
+    '''
+        defining User class
+    '''
     place_id = ""
     user_id = ""
     text = ""
