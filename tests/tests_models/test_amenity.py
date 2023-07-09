@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+"""Unittest module for Amenity"""
+
 import unittest
 from models.base_model import BaseModel
 from models.amenity import Amenity
