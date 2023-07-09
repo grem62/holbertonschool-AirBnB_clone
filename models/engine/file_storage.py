@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-FileStorage that serializes and deserializes instances to a JSON file
-"""
+""" Serializes and deserializes instances to a JSON file"""
 import json
 import os.path
 import models
@@ -41,10 +39,11 @@ class FileStorage:
         dict_key = obj.__class__.__name__ + '.' + obj.id
         self.__objects.update({dict_key: obj})
 
-
     def save(self):
         """ serializes __objects to the JSON file """
-        dict = {key: self.__objects[key].to_dict() for key in self.__objects}
+        dict = {}
+        for key in self.__objects:
+            dict[key] = self.__objects[key].to_dict()
         with open(self.__file_path, "w") as f:
             json.dump(dict, f)
 
@@ -53,4 +52,5 @@ class FileStorage:
         if os.path.isfile(self.__file_path):
             with open(self.__file_path, "r") as f:
                 json_obj = json.load(f)
-            self.__objects = {key: eval(val['__class__'])(**val) for key, val in json_obj.items()}
+            for key, val in json_obj.items():
+                self.__objects[key] = eval(val["__class__"])(**val)
