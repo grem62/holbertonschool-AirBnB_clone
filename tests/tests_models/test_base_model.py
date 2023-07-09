@@ -1,13 +1,8 @@
-#!/usr/bin/pyhton3
-"""Unittests module for BaseModel"""
-
-
 import unittest
-import os
 from datetime import datetime
-
 import models
 from models.base_model import BaseModel
+
 
 class TestBaseModel(unittest.TestCase):
     """ Test class for BaseModel """
@@ -35,7 +30,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test__str__(self):
         """Test __str__ method"""
-        self.assertEqual(str, type(BaseModel.__str__(self)))
+        self.assertEqual(str, type(str(BaseModel())))
 
     def test_save(self):
         """Test save method"""
@@ -48,5 +43,5 @@ class TestBaseModel(unittest.TestCase):
             self.assertIn(base.name, f.read())
 
 
-    if __name__ == '__main__':
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()
