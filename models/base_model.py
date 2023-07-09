@@ -38,7 +38,6 @@ class BaseModel:
         """
         return "[{}] ({})".format(self.__class__.__name__, self.id)
 
-
     def save(self):
         """
             updates the public instance attribute
