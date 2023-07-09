@@ -1,12 +1,15 @@
 #!/usr/bin/python3
-"""new class FileStorage"""
-
-
+""" Serializes and deserializes instances to a JSON file"""
 import json
 import os.path
 import models
 from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
@@ -16,13 +19,22 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
+    classes = {
+        'BaseModel': BaseModel,
+        'Place': Place,
+        'State': State,
+        'City': City,
+        'Amenity': Amenity,
+        'Review': Review
+    }
+
     def all(self):
         """ returns the dictionary __objects """
         return self.__objects
 
     def new(self, obj):
         """
-        sets in __objects the obj with key <obj class name>.id
+        Sets the obj in __objects with key <obj class name>.id
         """
         dict_key = obj.__class__.__name__ + '.' + obj.id
         self.__objects.update({dict_key: obj})
