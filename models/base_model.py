@@ -36,8 +36,8 @@ class BaseModel:
         """
         print the instance
         """
-        return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
-                                         self.__dict__)
+        return "[{}] ({})".format(self.__class__.__name__, self.id)
+
 
     def save(self):
         """
