@@ -26,5 +26,6 @@ class TestAmenity(unittest.TestCase):
         self.assertEqual(amenity_dict['updated_at'], amenity.updated_at.\
                          strftime("%Y-%m-%dT%H:%M:%S.%f"))
 
+
 if __name__ == '__main__':
     unittest.main()
