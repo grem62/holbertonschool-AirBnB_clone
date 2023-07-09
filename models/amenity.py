@@ -1,9 +1,12 @@
 #!/usr/bin/python3
-""" Amenity module. """
-
+'''
+    class User that inherits from BaseModel
+    '''
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
-    """ Amenity class from Basemodel """
+    '''
+        defining Amenity class
+    '''
     name = ""
