@@ -10,7 +10,7 @@ import models
 from models.base_model import BaseModel
 
 class TestBaseModel(unittest.TestCase):
-    """Test class for BaseModel"""
+    """ Test class for BaseModel """
 
     def test_id(self):
         """Test the id attribute"""
